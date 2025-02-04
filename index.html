@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>App Task</title>
+</head>
+<body>
+    <div class="container">
+        <h1>App Task</h1>
+        
+        <div class="user-profile">
+            <div id="fecha" class="fecha"></div>
+            <h2>Hola, Luis Palacios!</h2>
+            <p>Vamos a cumplir todas las tareas</p>
+        </div>
+
+        <div class="add-task">
+            <input type="text" id="input" placeholder="Agrega una tarea">
+            <i id="enter" class="fa fa-plus-circle" aria-hidden="true"></i>
+        </div>
+
+        <div class="section-task">
+            <h3>Estas son tus tareas Pendientes</h3>
+            <ul>
+                <li>
+                    <i class="fa fa-check-circle" aria-hidden="true" data="realizado" id="0"></i>
+                    <p class="text" >hacer la tarea</p>
+                    <i class="fa fa-trash" aria-hidden="true" data="eliminado" id="0"></i>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="./js/ui.js"></script>
+</body>
+</html>

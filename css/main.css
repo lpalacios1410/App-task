@@ -1,0 +1,111 @@
+.container {
+    width: 40vw;
+    height: 80vh;
+    margin: 0 auto;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.fecha {
+    color: white;
+    padding: 50px 0 0 0;
+    font-size: clamp(1rem, 2vw, 1.8rem);
+
+}
+
+/* ADD TASK */
+
+.add-task {
+    height: 70px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+    margin: 40px 0;
+    color: white;
+    gap: 70px;
+}
+
+.add-task input {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+}
+
+.add-task i {
+    font-size: 40px;
+    color: green;
+}
+
+.add-task i:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.add-task input::placeholder {
+    font-size: 1.1rem;
+    color: #e20d0d;
+    text-align: center;
+}
+
+/* SECTION TASK */
+
+.section-task {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.section-task h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.section-task li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: lightcyan;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.section-task i {
+    font-size: 30px;
+}
+
+.section-task i:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.section-task>ul p {
+    font-size: 1.2rem;
+}
+
+.section-task li:hover {
+    background: lightblue;
+    cursor: pointer;
+}
+
+.line-confirm {
+    text-decoration: line-through;
+    color: lightskyblue;
+}
