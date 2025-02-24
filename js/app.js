@@ -1,104 +1,77 @@
-import { saveTasks, getTask } from "../js/storage.js";
+import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "../js/storage.js";
+const taskInput = document.querySelector('#taskInput');
+const TaskList = document.querySelector('#lista')
 
-const botonAdd = document.querySelector('#enter'); // +
-const inputText = document.querySelector('#input'); // input de addtask
-const lista = document.querySelector('#lista');
+let ListTask = getTasksFromLocalStorage();
 
-const check = 'fa-circle-check';
-const unCheck = 'fa-circle';
-const lineConfirm = 'line-confirm';
-let LIST = getTask(); 
-let id = LIST.length;   
+const addTask = () => {
+    const textInput = taskInput.value.trim();
+    
+    if(textInput === '') {
+        alert('No has ingresado ninguna tarea')
+    } else {
+        ListTask.push({ textInput: textInput, completed: false})
+        taskInput.value = "";
+        updateTasksList();
+        saveTasksToLocalStorage(ListTask);
+    }
+};
 
-
-    // ADD TASK FUNCTION
-    function addTask(task, id, done, trash) {
-        if(trash) {
-            return;
-        }
-    const REALIZADO = done ? check : unCheck;
-    const LINE = done ? lineConfirm : '';
-    const element = `
-                     <li id="element">
-                     <i class="fa-regular ${REALIZADO}" data="done" id=${id}></i>
-                     <p class="text ${LINE}">${task}</p>
-                     <i class="fa-regular fa-trash-can" data="trash" id=${id}></i>
-                     </li>
-                     `
-    lista.insertAdjacentHTML('beforeend', element)
+const deleteTask = (index) => {
+    ListTask.splice(index, 1);
+    updateTasksList();
+    saveTasksToLocalStorage(ListTask);
 }
 
-    // TASK DONE FUNCTION
+const editTask = (index) => {
+    taskInput.value = ListTask[index].textInput;
+    ListTask.splice(index, 1);
+    updateTasksList();
+    saveTasksToLocalStorage(ListTask);
+}
 
-    function taskDone(element){
-        element.classList.toggle(check);
-        element.classList.toggle(unCheck);
-        element.parentNode.querySelector('.text').classList.toggle(lineConfirm);
-        LIST[element.id].done = LIST[element.id].done ? false : true; 
-    }
+const toggleTaskCompleted = (index) => {
+    ListTask[index].completed = !ListTask[index].completed; 
+    updateTasksList();
+    saveTasksToLocalStorage(ListTask);
+}
 
-    // TASK TRASH FUNCTION
-
-    function taskTrash(element){
-        element.parentNode.parentNode.removeChild(element.parentNode)
-        LIST[element.id].trash = true;
-    }
-
+const updateTasksList= () => {
+    TaskList.innerHTML = "";
     
-    // EVENT LISTENERS
-    botonAdd.addEventListener('click', () => {
-        const task = inputText.value;
-        // console.log('funciona')
-        if (task) {
-            addTask(task, id, false, false);
-            LIST.push({
-                nombre: task,
-                id: id,
-                done: false,
-                trash: false
-            })
-        }
-        inputText.value = '';
-        id = LIST.length;
-        saveTasks(LIST);
-    })
-
-    inputText.addEventListener('keyup', function(event){
+    ListTask.forEach((task, index ) => {
+        const listItem = document.createElement('li');
         
-        if (event.key === 'Enter' ){
-            const task = inputText.value;
-            if (task) {
-                addTask(task, id, false, false);
-                LIST.push({
-                    nombre: task,
-                    id: id,
-                    done: false,
-                    trash: false
-                })
-            }
-            inputText.value = '';
-            id = LIST.length;
-            saveTasks(LIST);
-        }
-    })
+        listItem.innerHTML = `
+        <div class="taskItem">
+            <div class="task ${task.completed ? 'completed' : ""}">
+                <input type="checkbox" class="checkbox" ${task.completed ? "checked" : ""} />
+                <p>${task.textInput}</p>
+            </div>
+            <div class="icons">
+                <button class="edit-btn" onClick="editTask(${index})">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="delete-btn" onClick="deleteTask(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </div>
+        `;
 
-    lista.addEventListener('click', function(event) {
-        const element = event.target;
-        const elementData = element.attributes.data.value
-        if (elementData === 'done'){
-             taskDone(element);
-        }
-        else if(elementData === 'trash'){
-             taskTrash(element);
-        }
-        saveTasks(LIST);
+    listItem.addEventListener('change', ()=> toggleTaskCompleted(index))
+    listItem.querySelector('.delete-btn').addEventListener('click', () => deleteTask(index));
+    listItem.querySelector('.edit-btn').addEventListener('click', () => editTask(index));
+    TaskList.appendChild(listItem);
     });
+};
+ 
+document.querySelector('#newTask').addEventListener('click', function(e){
+    e.preventDefault()
 
+    addTask();
+})
 
-    window.addEventListener('load', () => {
-        LIST.forEach(task => {
-            if (!task.trash) {
-                addTask(task.nombre, task.id, task.done, task.trash);
-            }
-        });
-    });
+window.addEventListener('load', () => {
+    updateTasksList();
+});

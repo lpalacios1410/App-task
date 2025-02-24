@@ -1,3 +1,11 @@
+/* 
+    CSS colors:
+
+    lightblue: #add8e6
+    darkblue2: #1f618d
+    taskcolor: #5499c7
+*/
+
 .container {
     width: 40vw;
     height: 80vh;
@@ -7,7 +15,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
+    border: 1px solid black;
 }
 
 .user-profile {
@@ -19,7 +27,7 @@
 }
 
 .fecha {
-    color: white;
+    color: black;
     padding: 50px 0 0 0;
     font-size: clamp(1rem, 2vw, 1.8rem);
 
@@ -29,83 +37,85 @@
 
 .add-task {
     height: 70px;
-    padding: 10px;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
-    background-color: white;
-    border-radius: 15px;
+    background-color: #add8e6;
+    border-radius: 0.5rem;
     margin: 40px 0;
     color: white;
-    gap: 70px;
+    gap: 3rem;
+    border: 2px solid black;
 }
 
 .add-task input {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
-    border: none;
+    border-radius: 0.5rem;
+    border: solid 2px #1f618d;
     background-color: white;
-}
-
-.add-task i {
-    font-size: 40px;
-    color: green;
-}
-
-.add-task i:hover {
-    transform: scale(1.1);
-    cursor: pointer;
 }
 
 .add-task input::placeholder {
     font-size: 1.1rem;
-    color: #e20d0d;
+    color: black;
     text-align: center;
 }
 
-/* SECTION TASK */
-
-.section-task {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-.section-task h3 {
+.add-task button {
+    background-color: #1f618d;
     color: white;
-    margin-bottom: 20px;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    cursor: pointer
 }
 
-.section-task li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: lightcyan;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 5px 0;
-}
-
-.section-task i {
-    font-size: 30px;
-}
-
-.section-task i:hover {
-    cursor: pointer;
+.add-task button:hover {
+    background-color: #5499c7;
     transform: scale(1.1);
 }
 
-.section-task>ul p {
-    font-size: 1.2rem;
+/* SECTION LISTASK */
+
+#lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+    list-style: none;
 }
 
-.section-task li:hover {
-    background: lightblue;
-    cursor: pointer;
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px
 }
 
-.line-confirm {
+.task input {
+    width: 20px;
+    height: 20px;
+}
+
+.completed p {
     text-decoration: line-through;
-    color: lightskyblue;
+    color: green;
+}
+
+.taskItem {
+    display: flex;
+    background-color: #add8e6;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskItem button {
+    width: 24px;
+    height: 24px;
+    margin: 0 10px;
+    cursor: pointer;
 }

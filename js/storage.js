@@ -1,9 +1,8 @@
+export function saveTasksToLocalStorage(ListTask) {
+  localStorage.setItem('tasks', JSON.stringify(ListTask));
+}
 
-export function saveTasks(LIST) {
-    localStorage.setItem('task', JSON.stringify(LIST));
-  }
-
-  export function getTask() {
-    const saveTasks = localStorage.getItem('task');
-    return saveTasks ? JSON.parse(saveTasks) : []; // Devuelve un array vacío si no hay tareas guardadas
-  }
+export function getTasksFromLocalStorage() {
+  const savedTasks = localStorage.getItem('tasks');
+  return savedTasks ? JSON.parse(savedTasks) : [];
+}
