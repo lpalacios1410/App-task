@@ -6,34 +6,50 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./css/edit.css">
+    <link rel="stylesheet" href="./css/dark-mode.css">
     <title>App Task</title>
 </head>
 <body>
     <div class="container">
         <h1>App Task</h1>
+        <button id="theme-toggle">Cambiar a Modo Oscuro</button>
         
         <div class="user-profile">
             <div id="fecha" class="fecha"></div>
             <h2>Hola, Luis Palacios!</h2>
             <p>Vamos a cumplir todas las tareas</p>
         </div>
-
+        <div class="stats-container">
+            <div id="progressBar">
+                <div id="progress"></div>
+            </div>
+            <div class="stats-numbers">
+                <p id="numbers">0/0</p>
+            </div>
+        </div>
+        
         <form class="add-task">
             <input type="text" id="taskInput"  placeholder="Agrega una tarea">
             <button type="submit" id="newTask">+</button>
         </form>
-
+        
         <div class="section-task">
             <h3>Estas son tus tareas Pendientes</h3>
+                <div class="filtros">
+                    <button id="showAllTask">All</button>
+                    <button id="showCompletedTask">Completed</button>
+                    <button id="showIncompletedTask">Incompleted</button>
+                </div>
             <ul id="lista">
                 
             </ul>
         </div>
-
     </div>
 
-    <script src="./js/ui.js"></script>
     <script src="./js/app.js" type="module"></script>
+    <script src="./js/filters.js" type="module"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/dark-mode.js" type="module"></script>
     <script src="https://kit.fontawesome.com/659da6503d.js" crossorigin="anonymous"></script>
     
 </body>

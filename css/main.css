@@ -8,7 +8,7 @@
 
 .container {
     width: 40vw;
-    height: 80vh;
+    height: 100%;
     margin: 0 auto;
     min-width: 300px;
     display: flex;
@@ -27,10 +27,47 @@
 }
 
 .fecha {
-    color: black;
     padding: 50px 0 0 0;
     font-size: clamp(1rem, 2vw, 1.8rem);
 
+}
+
+/* Progress Bar */
+.stats-container {
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#progressBar {
+    width: 100%;
+    height: 10px;
+    background: red;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#progress {
+    width: 0%;
+    height: 10px;
+    background: green;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#numbers {
+    width: 100px;
+    height: 100px;
+    background: #1f618d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* ADD TASK */
@@ -40,7 +77,7 @@
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    background-color: #add8e6;
+    /* background-color: #add8e6; */
     border-radius: 0.5rem;
     margin: 40px 0;
     color: white;
@@ -53,7 +90,6 @@
     height: 100%;
     border-radius: 0.5rem;
     border: solid 2px #1f618d;
-    background-color: white;
 }
 
 .add-task input::placeholder {
@@ -118,4 +154,14 @@
     height: 24px;
     margin: 0 10px;
     cursor: pointer;
+}
+
+/* CSS FILTER */
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
 }
