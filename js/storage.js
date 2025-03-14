@@ -1,7 +1,7 @@
 // TASK IN LOCALSTORAGE
 
-export function saveTasksToLocalStorage(ListTask) {
-  localStorage.setItem('tasks', JSON.stringify(ListTask));
+export function saveTasksToLocalStorage(taskListItems) {
+  localStorage.setItem('tasks', JSON.stringify(taskListItems));
 }
 
 export function getTasksFromLocalStorage() {

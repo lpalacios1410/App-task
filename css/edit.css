@@ -1,15 +1,13 @@
-.editar-input {
-    width: 100%;
-    padding: 8px;
+.tarea {
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.3s ease;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-.editar-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.editar-tarea {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }

@@ -5,6 +5,15 @@ const taskListNode = document.querySelector('#lista') // Este es el nodo de la U
 
 export let taskListItems = getTasksFromLocalStorage(); 
 initializeTheme();
+
+Sortable.create(taskListNode,{
+    animation: 500,
+    easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+    onEnd: () => {
+        saveTasksToLocalStorage(taskListItems);
+    }
+    
+})
 const addTask = () => {
     const textInput = taskInput.value.trim();
     
@@ -16,7 +25,6 @@ const addTask = () => {
         updateTasksList(taskListItems);
         saveTasksToLocalStorage(taskListItems);
         updateStats(taskListItems);
-        console.log(taskListItems);
     }
 };
 
@@ -28,13 +36,16 @@ const deleteTask = (index) => {
     alert   ('Tarea Eliminada; ', index)
 }
 
-const editTask = (index) => {
+const editTask = () => {
 
-    taskInput.value = taskListItems[index].textInput;
-    taskListItems.splice(index, 1);
-    updateTasksList(taskListItems);
-    saveTasksToLocalStorage(taskListItems);
-    updateStats(taskListItems);
+    const valueTaskText = taskInput.value.trim();
+    console.log('funciona esto' + valueTaskText)
+
+    // taskInput.value = taskListItems[index].textInput;
+    // taskListItems.splice(index, 1);
+    // updateTasksList(taskListItems);
+    // saveTasksToLocalStorage(taskListItems);
+    // updateStats(taskListItems);
    
     // const taskElement = document.getElementById(`task${e}`);
     // const taskText = taskListItems[index].textInput;
@@ -67,9 +78,9 @@ const editTask = (index) => {
 
 const toggleTaskCompleted = (index) => {
     taskListItems[index].completed = !taskListItems[index].completed; 
-    updateTasksList(taskListItems);
     saveTasksToLocalStorage(taskListItems);
     updateStats(taskListItems);
+    updateTasksList(taskListItems);
 }
 
 const updateTasksList = (tasks) => {
@@ -107,7 +118,7 @@ document.querySelector('#newTask').addEventListener('click', function(e){
 })
 
 window.addEventListener('load', () => {
-    const listItem = document.querySelectorAll('.taskItem');
+    updateStats(taskListItems);
     updateTasksList(taskListItems);
 
     document.querySelectorAll('.delete-btn').forEach((button)=>{
@@ -115,8 +126,8 @@ window.addEventListener('load', () => {
             const taskItem = e.target.closest('.taskItem')
             console.log(taskItem)
             const taskId = taskItem.dataset.taskId;
+            console.log(taskId)
             deleteTask(taskId)
-            updateStats(taskListItems);
         })
     });
 
