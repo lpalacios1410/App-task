@@ -1,3 +1,10 @@
-const FechaActual = document.querySelector('#fecha')
-const Fecha = new Date();
-FechaActual.innerHTML = Fecha.toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'})
+const InitialDate = document.querySelector('#fecha')
+const newDate = new Date();
+
+InitialDate.innerHTML = newDate.toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'})
+
+export function showAndCloseModal() {
+    const modal = document.querySelector('.modal');
+    modal.classList.toggle('modal-show');
+}
+

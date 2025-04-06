@@ -1,13 +1,58 @@
-.tarea {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #505050bd;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
 }
 
-.editar-tarea {
-    background-color: #007bff;
+.modal-content {
+    width: 90%;
+    max-width: 400px;
+    max-height: 90%;
+    border-radius: 6px;
+    padding: 3em 2.5em;
+    background-color: rgb(35, 35, 35);
+    margin: auto;
+    display: grid;
+    gap: 1em;
+    place-items: center;
+    grid-auto-columns: 100%;
+}
+
+.modal-content h2 {
     color: white;
+    font-size: 1.5em;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 6px;
     border: none;
-    padding: 5px 10px;
+}
+
+.modal-content button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 6px;
+    background-color: #1f618d;
+    color: white;
     cursor: pointer;
+    border: 1px solid #1f618d;
+}
+
+.modal-content button:hover {
+    background-color: transparent;
+    border: 1px solid #1f618d;
+    transition: all 0.3s ease;
+}
+
+.modal-show {
+    opacity: 1;
+    pointer-events: unset;
 }

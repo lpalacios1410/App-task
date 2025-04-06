@@ -10,7 +10,7 @@ export const updateTasksListFilter = (filtro) =>{
     
     let tasksFilter = taskListItems
     
-    if(filtro === 'completed') {
+    if(filtro === 'completed') { 
         return tasksFilter = TaskCompleted;
     }else if( filtro === 'incompleted'){
         return tasksFilter = TaskNotCompleted;

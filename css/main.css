@@ -7,15 +7,14 @@
 */
 
 .container {
-    width: 40vw;
+    width: 70vw;
     height: 100%;
     margin: 0 auto;
     min-width: 300px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .user-profile {
@@ -27,15 +26,17 @@
 }
 
 .fecha {
-    padding: 50px 0 0 0;
+    padding: 1rem 0 0 0;
     font-size: clamp(1rem, 2vw, 1.8rem);
 
 }
 
-/* Progress Bar */
+/* 
+    //  PROGRESS BAR 
+*/
 .stats-container {
     width: 100%;
-    padding: 30px;
+    padding: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column-reverse;
@@ -70,14 +71,15 @@
     font-weight: bold;
 }
 
-/* ADD TASK */
+/* 
+    //  ADD TASK STYLES
+*/
 
 .add-task {
     height: 70px;
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    /* background-color: #add8e6; */
     border-radius: 0.5rem;
     margin: 40px 0;
     color: white;
@@ -105,7 +107,8 @@
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
-    cursor: pointer
+    cursor: pointer;
+    transition: ease 0.5s;
 }
 
 .add-task button:hover {
@@ -113,15 +116,21 @@
     transform: scale(1.1);
 }
 
-/* SECTION LISTASK */
+/* 
+    //  SECTION LISTASK STYLES
+*/
 
 #lista {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 30px;
+    gap: 0.5rem;
+    margin-top: 1rem;
     width: 100%;
     list-style: none;
+}
+
+.section-task {
+    margin-bottom: 1rem;
 }
 
 .task {
@@ -142,7 +151,6 @@
 
 .taskItem {
     display: flex;
-    background-color: #add8e6;
     padding: 10px;
     border-radius: 10px;
     justify-content: space-between;
@@ -156,7 +164,9 @@
     cursor: pointer;
 }
 
-/* CSS FILTER */
+/* 
+    //  CSS FILTER STYLES
+*/
 
 .filtros {
     display: flex;
@@ -164,4 +174,85 @@
     flex-direction: row;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.filtros button {
+    border: none;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s;
+    /* Transición suave */
+    cursor: pointer;
+}
+
+.filtros button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.showAllTask:hover,
+.showCompletedTask:hover {
+    background-color: green;
+}
+
+.showIncompletedTask:hover {
+    background-color: red;
+}
+
+/* 
+    // SECTION JOBS STYLES
+*/
+
+.section-jobs {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20vh;
+    justify-content: space-around;
+    padding-top: 1.5rem;
+    align-items: center;
+}
+
+.section-completed,
+.section-incompleted {
+    display: flex;
+    padding: 1rem;
+    width: 50%;
+    min-width: 150px;
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+    min-height: 200px;
+    max-height: 130px;
+    align-items: center;
+}
+
+.section-completed {
+    border-right: 2px solid red;
+}
+
+#taskNodeCompleted,
+#taskNodeIncompleted {
+    width: 80%;
+    list-style: none;
+}
+
+
+
+/* 
+    //  CSS SWEET ALERT STYLES
+*/
+
+.swal-text,
+.swal-title {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.swal-button {
+    background-color: green;
 }

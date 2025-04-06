@@ -12,6 +12,7 @@
 <body>
     <div class="container">
         <h1>App Task</h1>
+
         <button id="theme-toggle">Cambiar a Modo Oscuro</button>
         
         <div class="user-profile">
@@ -34,23 +35,41 @@
         </form>
         
         <div class="section-task">
-            <h3>Estas son tus tareas Pendientes</h3>
-                <div class="filtros">
-                    <button id="showAllTask">All</button>
-                    <button id="showCompletedTask">Completed</button>
-                    <button id="showIncompletedTask">Incompleted</button>
-                </div>
+            <h3>Estas son tus tareas <strong>Pendientes</strong></h3>
             <ul id="lista">
-                
+                <!-- Esto se rellenara dinamicamente con js -->
             </ul>
         </div>
-    </div>
+        <div class="section-jobs">
+            <div class ="section-completed">
+                <h3>Estas son tus tareas <strong>Completadas</strong></h3>
+                <ul id="taskNodeCompleted">
+                    <!-- Esto se rellenara dinamicamente con js -->
+                </ul>
+            </div>
+            <div class ="section-incompleted">
+                <h3>Estas son tus tareas <strong>Incompletas</strong></h3>
+                <ul id="taskNodeIncompleted">
+                    <!-- Esto se rellenara dinamicamente con js -->
+                </ul>
+            </div>
+        </div>
+
+    <section class="modal">
+        <div class="modal-content">
+            <h2>Editar Tarea</h2>
+            <label for="editTaskInput">Editar Tarea:</label>
+            <input type="text" id="editTaskInput" placeholder="Edita tu tarea">
+            <button id="saveChanges">Guardar Cambios</button>
+            <button id="close-modal">Cerrar</button>
+        </div>
+    </section>
+    
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/app.js" type="module"></script>
     <script src="./js/filters.js" type="module"></script>
-    <script src="./js/ui.js"></script>
-    <script src="./js/dark-mode.js" type="module"></script>
+    <script src="./js/ui.js" type="module"></script>
     <script src="https://kit.fontawesome.com/659da6503d.js" crossorigin="anonymous"></script>
-    
 </body>
 </html>
