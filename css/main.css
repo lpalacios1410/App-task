@@ -149,6 +149,11 @@
     color: green;
 }
 
+.incompleted p {
+    text-decoration: line-through;
+    color: red;
+}
+
 .taskItem {
     display: flex;
     padding: 10px;
@@ -162,45 +167,6 @@
     height: 24px;
     margin: 0 10px;
     cursor: pointer;
-}
-
-/* 
-    //  CSS FILTER STYLES
-*/
-
-.filtros {
-    display: flex;
-    gap: 10px;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 1rem;
-}
-
-.filtros button {
-    border: none;
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 8px;
-    /* Bordes redondeados */
-    transition: background-color 0.3s;
-    /* Transición suave */
-    cursor: pointer;
-}
-
-.filtros button:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.showAllTask:hover,
-.showCompletedTask:hover {
-    background-color: green;
-}
-
-.showIncompletedTask:hover {
-    background-color: red;
 }
 
 /* 

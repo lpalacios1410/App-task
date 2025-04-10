@@ -1,5 +1,5 @@
 import { saveTasksToLocalStorage, getTasksFromLocalStorage, initializeTheme } from "../js/storage.js";
-import { updateTasksListFilter, updateStats } from "./filters.js";
+import { updateStats } from "./filters.js";
 import  {showAndCloseModal}  from "./ui.js";
 import { addAlert, notAddAlert, deleteAlert, editAlert } from "./sweetAlert.js";
 
@@ -12,30 +12,61 @@ const tasksIncompleted = document.querySelector('#taskNodeIncompleted')
 export let taskListItems = getTasksFromLocalStorage(); 
 initializeTheme();
 
-Sortable.create(taskListNode, {
-    group:"shared",
-    animation: 500,
-    easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    onEnd: () => {
-        saveTasksToLocalStorage(taskListItems);
-    }
-})
-Sortable.create(tasksCompleted, {
-    group:"shared",
-    animation: 500,
-    easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    onEnd: () => {
-        saveTasksToLocalStorage(taskListItems);
-    }
-})
-Sortable.create(tasksIncompleted, {
-    group:"shared",
-    animation: 500,
-    easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-    onEnd: () => {
-        saveTasksToLocalStorage(taskListItems);
-    }
-})
+[taskListNode, tasksCompleted, tasksIncompleted].forEach(element => {
+    Sortable.create(element, {
+        group: "shared",
+        animation: 500,
+        easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+        onEnd: (e) => {
+
+            if (e.from !== e.to) {  // verificamos que se movio a otra lista e.from es la lista inicial
+                                    // y e.to es la lista a la cual vamos a mover el elemento
+                const itemId = e.item.querySelector('.taskItem').id;
+                const itemIndex = parseInt(itemId);
+                
+                // Verificar el estado basado en la lista de destino
+                let newState = false;
+                if (e.to.id === 'taskNodeCompleted') {
+                    newState = true;
+                } else if (e.to.id === 'taskNodeIncompleted') {
+                    newState = false;
+                } else if ( e.to.id === 'lista'){
+                    newState = false;
+                }
+                
+                taskListItems[itemIndex].completed = newState;
+                
+                const checkbox = e.item.querySelector('.checkbox');
+                if (checkbox) {
+                    checkbox.checked = newState;
+                    
+                // Actualizar la clase 'completed' en el texto
+                const textElement = e.item.querySelector('.textTask');
+                if (textElement) {
+                    if (newState) {
+                        textElement.parentElement.classList.add('completed');
+                    } else {
+                        textElement.parentElement.classList.remove('completed');
+                    }
+                }
+                // Actualizar la clase 'incompleted' en el texto
+                const elementText = e.item.querySelector('.textTask');
+                if (elementText) {
+                    if (newState === false) {
+                        elementText.parentElement.classList.add('incompleted');
+                    } else {
+                        elementText.parentElement.classList.remove('incompleted');
+                     }
+                    }
+                }
+            }
+            // Actualizar la UI y guardar
+            updateUI({ save: true, stats: true, tasks: false });
+        }
+        
+    });
+});
+
 const storage = {
     save: (tasks) => saveTasksToLocalStorage(tasks),
     load: () => getTasksFromLocalStorage()
@@ -50,14 +81,14 @@ const addTask = () => {
     } else {
         taskListItems.push({textInput: textInput, completed: false})
         taskInput.value = "";
-        updateUI();
+        updateUI({ save: true, stats: true, tasks: true});
         addAlert();
     }
 };
 
 const deleteTask = (index) => {
     taskListItems.splice(index, 1);
-    updateUI();
+    updateUI({ save: true, stats: true, tasks: true});
     deleteAlert();
 }
 
@@ -73,7 +104,7 @@ const editTask = (index) => {
     saveButton.addEventListener('click', () =>{
         const newTaskValue = inputNewTask.value;
         taskListItems[index].textInput = newTaskValue;
-        updateUI(index, newTaskValue);
+        updateUI(index, newTaskValue, { save: true, stats: true, tasks: true});
         showAndCloseModal();
         editAlert();
     })
@@ -81,7 +112,7 @@ const editTask = (index) => {
 
 const toggleTaskCompleted = (index) => {
     taskListItems[index].completed = !taskListItems[index].completed; 
-    updateUI();
+    updateUI({ save: true, stats: true, tasks: false});
 }
 
 const updateTasksList = (tasks) => {
@@ -93,7 +124,7 @@ const updateTasksList = (tasks) => {
         listItem.innerHTML = `
         <div class="taskItem" id="${index}">
             <div class="task ${tasks.completed ? 'completed' : ""}">
-                <input type="checkbox" class="checkbox" ${tasks.completed ? "checked" : ""} />
+                <label class="checkbox" ${tasks.completed ? "checked" : ""} />
                 <p class="textTask">${tasks.textInput}</p>
             </div>
             <div class="icons">
@@ -113,11 +144,17 @@ const updateTasksList = (tasks) => {
     });
 };
 
-const updateUI = () => {
-    storage.save(taskListItems);
-    updateStats(taskListItems);
-    updateTasksList(taskListItems);
+const updateUI = (options = {save: true, stats: true, tasks: true}) => {
+
+    if (options.save) storage.save(taskListItems)
+    if (options.stats) updateStats(taskListItems)
+    if (options.tasks) updateTasksList(taskListItems)
+    
+    // storage.save(taskListItems);
+    // updateStats(taskListItems);
+    // updateTasksList(taskListItems);
 }
+
 
 document.querySelector('#newTask').addEventListener('click', function(e){
     e.preventDefault()
@@ -125,18 +162,7 @@ document.querySelector('#newTask').addEventListener('click', function(e){
 })
 
 window.addEventListener('load', () => {
-    updateUI();      
+    updateUI({ save: true, stats: true, tasks: true});      
 });
 
-// document.querySelector('#showAllTask').addEventListener('click', () => {
-//     updateTasksList(taskListItems)  
-// });
-// document.querySelector('#showCompletedTask').addEventListener('click', () => {
-//     const resultTask =  updateTasksListFilter('completed');
-//     updateTasksList(resultTask);
-// });
-// document.querySelector('#showIncompletedTask').addEventListener('click', () => {
-//     const resultTask =  updateTasksListFilter('incompleted');
-//     updateTasksList(resultTask);
-// });
 
